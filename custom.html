@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type='text/javascript' src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+        <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+        <script type='text/javascript' src='jquery.swiftype.search.js'></script>
+        <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+        <script type='text/javascript'>
+        var resultTemplate = Hogan.compile('<div class="st-result"><h3 class="title"><a href="{{url}}" class="st-search-result-link">{{title}}</a></h3><div class="st-metadata"><span class="st-snippet">{{{body}}}</span></div></div>');
+        var customRenderer = function(documentType, item) {
+          var data = {
+            title: item['title'],
+            url: item['url'],
+            body: item.highlight['body'] || 'No content.'
+          };
+          return resultTemplate.render(data);
+        };
+
+        $(function() {
+          $('#st-search-input').swiftypeSearch({
+            resultContainingElement: '#st-results-container',
+            engineKey: 'ByWo1qBYvNdcSkwsMfp1',
+            renderFunction: customRenderer
+          });
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+          <h1>Example Swiftype Search installation</h1>
+          Search your site: <input type='text' id='st-search-input' class='st-search-input' />
+        </form>
+        <div id="st-results-container" class="st-result-listing"></div>
+    </body>
+</html>

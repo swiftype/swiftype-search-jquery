@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+        <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+        <script type='text/javascript' src='jquery.swiftype.search.js'></script>
+        <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+        <script type='text/javascript'>
+          $(function() {
+            $('#st-search-input').swiftypeSearch({
+              resultContainingElement: '#st-results-container',
+              engineKey: 'ByWo1qBYvNdcSkwsMfp1'
+            });
+          });
+        </script>
+    </head>
+    <body>
+        <form>
+          <h1>Example Swiftype Search installation</h1>
+          Search your site: <input type='text' id='st-search-input' class='st-search-input' />
+        </form>
+        <div id="st-results-container" class="st-result-listing"></div>
+    </body>
+</html>
