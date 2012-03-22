@@ -92,6 +92,8 @@
           Swiftype.currentQuery = query;
           params['q'] = query;
           params['engine_key'] = config.engineKey;
+          params['page'] = options.page;
+          params['per_page'] = options.per_page;
 
           if (config.searchFields !== undefined) {
             params['search_fields'] = config.searchFields;
@@ -109,7 +111,7 @@
             params['functional_boosts'] = config.functionalBoosts;
           }
 
-          $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?&q=" + query + "&page=" + options.page + "&per_page=" + options.per_page + "&engine_key=" + config.engineKey).success(renderSearchResults);
+          $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json", params).success(renderSearchResults);
         };
 
       $(window).hashchange(function () {
