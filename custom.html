@@ -20,8 +20,11 @@
         $(function() {
           $('#st-search-input').swiftypeSearch({
             resultContainingElement: '#st-results-container',
-            engineKey: 'ByWo1qBYvNdcSkwsMfp1',
-            renderFunction: customRenderer
+            engineKey: 'dqo8MA3GPnNLeUGKv4zT',
+            renderFunction: customRenderer,
+            sortField: function() {
+              return {page: $('#st-sort-field').val()};
+            }
           });
         });
         </script>
@@ -31,6 +34,7 @@
           <h1>Example Swiftype Search installation</h1>
           Search your site: <input type='text' id='st-search-input' class='st-search-input' />
         </form>
+        Sort by: <input type='text' id='st-sort-field' value="external_id" />
         <div id="st-results-container" class="st-result-listing"></div>
     </body>
 </html>

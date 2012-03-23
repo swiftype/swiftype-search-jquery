@@ -102,13 +102,31 @@
             params['fetch_fields'] = config.fetchFields;
           }
           if (config.filters !== undefined) {
-            params['filters'] = config.filters;
+            var filters = config.filters;
+            if (typeof filters === 'function') {
+              filters = filters.call();
+            }
+            params['filters'] = filters;
           }
           if (config.documentTypes !== undefined) {
             params['document_types'] = config.documentTypes;
           }
           if (config.functionalBoosts !== undefined) {
             params['functional_boosts'] = config.functionalBoosts;
+          }
+          if (config.sortField !== undefined) {
+            var sortField = config.sortField;
+            if (typeof sortField === 'function') {
+              sortField = sortField.call();
+            }
+            params['sort_field'] = sortField;
+          }
+          if (config.sortDirection !== undefined) {
+            var sortDirection = config.sortDirection;
+            if (typeof sortDirection === 'function') {
+              sortDirection = sortDirection.call();
+            }
+            params['sort_direction'] = sortDirection;
           }
 
           $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json", params).success(renderSearchResults);
@@ -206,6 +224,8 @@
     engineKey: undefined,
     searchFields: undefined,
     functionalBoosts: undefined,
+    sortField: undefined,
+    sortDirection: undefined,
     fetchFields: undefined,
     renderFunction: defaultRenderFunction
   };
