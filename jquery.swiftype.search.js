@@ -129,7 +129,7 @@
             params['sort_direction'] = sortDirection;
           }
 
-          $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json", params).success(renderSearchResults);
+          $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?", params).success(renderSearchResults);
         };
 
       $(window).hashchange(function () {
