@@ -164,28 +164,18 @@
 
       var renderSearchResults = function (data) {
           $resultContainer.html('');
-          var firstType, info = data.info;
-          for (var key in info) {
-            if (info.hasOwnProperty(key)) {
-              firstType = info[key];
-              break;
-            }
-          }
-          var query = firstType.query,
-            currentPage = firstType.current_page,
-            totalPages = firstType.num_pages;
-          $.each(data.records, function (document_type, items) {
+          $.each(data.records, function (documentType, items) {
             $.each(items, function (idx, item) {
-              $this.registerResult($(config.renderFunction(document_type, item)).appendTo($resultContainer), item);
+              $this.registerResult($(config.renderFunction(documentType, item)).appendTo($resultContainer), item);
             });
           });
-          $(renderPagination(currentPage, totalPages)).appendTo($resultContainer);
+          renderPagination($this.getContext(), data.info);
         };
 
       $this.getContext = function () {
         return {
           config: config,
-          list: $list,
+          resultContainer: $resultContainer,
           registerResult: $this.registerResult
         };
       };
@@ -194,8 +184,19 @@
     });
   };
 
+  var renderPagination = function (ctx, resultInfo) {
+    var maxPagesType, maxPages = 0;
+    $.each(resultInfo, function(documentType, typeInfo) {
+      if (typeInfo.num_pages > maxPages) {
+        maxPagesType = documentType;
+      }
+    });
+    var currentPage = resultInfo[maxPagesType].current_page,
+      totalPages = resultInfo[maxPagesType].num_pages;
+    $(renderPaginationForType(maxPagesType, currentPage, totalPages)).appendTo(ctx.resultContainer);
+  };
 
-  var renderPagination = function (currentPage, totalPages) {
+  var renderPaginationForType = function (type, currentPage, totalPages) {
       var pages = '',
         previousPage, nextPage;
       if (currentPage != 1) {
