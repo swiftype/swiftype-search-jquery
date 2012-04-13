@@ -185,7 +185,7 @@
   };
 
   var renderPagination = function (ctx, resultInfo) {
-    var maxPagesType, maxPages = 0;
+    var maxPagesType, maxPages = -1;
     $.each(resultInfo, function(documentType, typeInfo) {
       if (typeInfo.num_pages > maxPages) {
         maxPagesType = documentType;
