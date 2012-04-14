@@ -163,6 +163,10 @@
       });
 
       var renderSearchResults = function (data) {
+          if (typeof config.preRenderFunction === 'function') {
+            config.preRenderFunction.call($this, data);
+          }
+
           $resultContainer.html('');
           $.each(data.records, function (documentType, items) {
             $.each(items, function (idx, item) {
@@ -228,6 +232,7 @@
     sortField: undefined,
     sortDirection: undefined,
     fetchFields: undefined,
+    preRenderFunction: undefined,
     renderFunction: defaultRenderFunction
   };
 })(jQuery);
