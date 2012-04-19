@@ -163,11 +163,11 @@
       });
 
       var renderSearchResults = function (data) {
+          $resultContainer.html('');
           if (typeof config.preRenderFunction === 'function') {
             config.preRenderFunction.call($this, data);
           }
 
-          $resultContainer.html('');
           $.each(data.records, function (documentType, items) {
             $.each(items, function (idx, item) {
               $this.registerResult($(config.renderFunction(documentType, item)).appendTo($resultContainer), item);
