@@ -87,7 +87,7 @@
             $resultContainer.after("<div id='" + contentCacheId + "' style='display: none;'></div>");
             $contentCache.html(initialContentOfResultContainer).hide();
           }
-          $resultContainer.html('<p class="st-loading-message">loading...</p>');
+          config.loadingFunction(query, $resultContainer);
 
           Swiftype.currentQuery = query;
           params['q'] = query;
@@ -222,6 +222,10 @@
       return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
     };
 
+  var defaultLoadingFunction = function(query, $resultContainer) {
+      $resultContainer.html('<p class="st-loading-message">loading...</p>');
+    };
+
   $.fn.swiftypeSearch.defaults = {
     attachTo: undefined,
     documentTypes: undefined,
@@ -233,6 +237,7 @@
     sortDirection: undefined,
     fetchFields: undefined,
     preRenderFunction: undefined,
+    loadingFunction: defaultLoadingFunction,
     renderFunction: defaultRenderFunction
   };
 })(jQuery);
