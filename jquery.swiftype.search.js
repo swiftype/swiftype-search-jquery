@@ -201,16 +201,17 @@
   };
 
   var renderPaginationForType = function (type, currentPage, totalPages) {
-      var pages = '',
+      var pages = '<div class="st-page">',
         previousPage, nextPage;
       if (currentPage != 1) {
         previousPage = currentPage - 1;
-        pages = pages + '<a href="#" class="st-page st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>'
+        pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>';
       }
       if (currentPage < totalPages) {
         nextPage = currentPage + 1;
-        pages = pages + '<a href="#" class="st-page st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>'
+        pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>';
       }
+      pages += '</div>';
       return pages;
     };
 
