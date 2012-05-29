@@ -66,13 +66,13 @@ Now that you have more data for each result item, you'll want to customize the i
 
 The default rendering function is shown below:
 
-    var defaultRenderFunction = function (document_type, item) {
+    var defaultRenderFunction = function(document_type, item) {
       return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
     };
 
 The additional fields are available as keys in the item dictionary, so you could customize this to make use of the `genre` field as follows:
 
-	var customRenderFunction = function(item, config) {
+	var customRenderFunction = function(document_type, item) {
 		var out = '<a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a>';
 		return out.concat('<p class="genre">' + item['genre'] + '</p>');
 	};
