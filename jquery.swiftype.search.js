@@ -95,39 +95,24 @@
           params['page'] = options.page;
           params['per_page'] = options.per_page;
 
-          if (config.searchFields !== undefined) {
-            params['search_fields'] = config.searchFields;
-          }
-          if (config.fetchFields !== undefined) {
-            params['fetch_fields'] = config.fetchFields;
-          }
-          if (config.filters !== undefined) {
-            var filters = config.filters;
-            if (typeof filters === 'function') {
-              filters = filters.call();
+          function handleFunctionParam(field) {
+            if (field !== undefined) {
+              var evald = field;
+              if (typeof evald === 'function') {
+                evald = evald.call();
+              }
+              return evald;
             }
-            params['filters'] = filters;
+            return undefined;
           }
-          if (config.documentTypes !== undefined) {
-            params['document_types'] = config.documentTypes;
-          }
-          if (config.functionalBoosts !== undefined) {
-            params['functional_boosts'] = config.functionalBoosts;
-          }
-          if (config.sortField !== undefined) {
-            var sortField = config.sortField;
-            if (typeof sortField === 'function') {
-              sortField = sortField.call();
-            }
-            params['sort_field'] = sortField;
-          }
-          if (config.sortDirection !== undefined) {
-            var sortDirection = config.sortDirection;
-            if (typeof sortDirection === 'function') {
-              sortDirection = sortDirection.call();
-            }
-            params['sort_direction'] = sortDirection;
-          }
+
+          params['search_fields'] = handleFunctionParam(config.searchFields);
+          params['fetch_fields'] = handleFunctionParam(config.fetchFields);
+          params['filters'] = handleFunctionParam(config.filters);
+          params['document_types'] = handleFunctionParam(config.documentTypes);
+          params['functional_boosts'] = handleFunctionParam(config.functionalBoosts);
+          params['sort_field'] = handleFunctionParam(config.sortField);
+          params['sort_direction'] = handleFunctionParam(config.sortDirection);
 
           $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?", params).success(renderSearchResults);
         };
