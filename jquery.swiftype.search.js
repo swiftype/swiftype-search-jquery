@@ -178,6 +178,7 @@
     $.each(resultInfo, function(documentType, typeInfo) {
       if (typeInfo.num_pages > maxPages) {
         maxPagesType = documentType;
+        maxPages = typeInfo.num_pages;
       }
     });
     var currentPage = resultInfo[maxPagesType].current_page,
