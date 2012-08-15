@@ -73,7 +73,7 @@
         $contentCache = $this.getContentCache();
 
       var setSearchHash = function (query, page) {
-          location.hash = "stq=" + query + "&stp=" + page;
+          location.hash = "stq=" + encodeURIComponent(query) + "&stp=" + page;
         };
 
       var submitSearch = function (query, options) {
