@@ -205,8 +205,12 @@
       return $.trim(str).toLowerCase();
     };
 
+  function htmlEscape(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   var defaultRenderFunction = function (document_type, item) {
-      return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
+      return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + htmlEscape(item['title']) + '</a></h3></div>';
     };
 
   var defaultLoadingFunction = function(query, $resultContainer) {
