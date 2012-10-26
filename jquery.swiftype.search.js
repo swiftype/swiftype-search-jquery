@@ -78,7 +78,6 @@
 
       var submitSearch = function (query, options) {
           options = $.extend({
-            per_page: 10,
             page: 1
           }, options);
           var params = {};
@@ -93,7 +92,7 @@
           params['q'] = query;
           params['engine_key'] = config.engineKey;
           params['page'] = options.page;
-          params['per_page'] = options.per_page;
+          params['per_page'] = config.perPage;
 
           function handleFunctionParam(field) {
             if (field !== undefined) {
@@ -229,6 +228,7 @@
     fetchFields: undefined,
     preRenderFunction: undefined,
     loadingFunction: defaultLoadingFunction,
-    renderFunction: defaultRenderFunction
+    renderFunction: defaultRenderFunction,
+    perPage: 10
   };
 })(jQuery);

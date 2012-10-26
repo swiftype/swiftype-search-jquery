@@ -49,6 +49,17 @@ the way data is display to the user, or restrict the search query to certain ele
 
 Let's go through an example that does all of this. For this example, let's assume you followed the QuickStart tutorial for our [Ruby Gem](https://github.com/swiftype/swiftype-rb), and now you have data for a Bookstore indexed in your example search engine.
 
+#### Changing the number of results per page
+
+To specify the number of results per page, use the `perPage` attribute.
+
+	$('#st-search-input').swiftypeSearch({ 
+		engineKey: 'jaDGyzkR6iYHkfNsPpNK',
+                perPage: 20
+	});
+        
+The maximium value that will be honored by the API is 100.
+
 #### Fetching only the fields you specify
 
 To specify the fields you would like returned from the API, set the `fetchFields` attribute to a hash containing an array listing the fields you want returned for each document type. For example, if you have indexed `title`, `genre`, and `published_on` fields for each document, you can have them returned as follows:
