@@ -125,7 +125,7 @@
         } else {
           var $contentCache = $this.getContentCache();
           if ($contentCache.length) {
-            $resultContainer.html(contentCache.html());
+            $resultContainer.html($contentCache.html());
             $contentCache.remove();
           }
         }
