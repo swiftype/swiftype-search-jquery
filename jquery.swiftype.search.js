@@ -49,7 +49,7 @@
     return this.each(function () {
       var $this = $(this);
       var config = $.meta ? $.extend({}, options, $this.data()) : options;
-      $this.data('swiftype-config', config);
+      $this.data('swiftype-config-search', config);
 
       $this.selectedCallback = function (data) {
         return function (e) {
