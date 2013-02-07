@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type='text/javascript' src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+        <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+        <script type='text/javascript' src='jquery.swiftype.search.js'></script>
+        <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+        <script type='text/javascript'>
+        var resultTemplateOne = Hogan.compile('<div class="st-result"><h2 class="title"><a href="{{url}}" class="st-search-result-link">{{{title}}}</a></h2><div class="st-metadata"><span class="st-snippet">{{{body}}}</span></div><div><br style="clear:both;"/></div></div><br/>');
+        var resultTemplateTwo = Hogan.compile('<div class="st-result"><h2 class="title"><a href="{{url}}" class="st-search-result-link">{{{title}}}</a></h2><div class="st-metadata">{{{body}}}</div></div>');
+
+        var renderPagination = function (ctx, resultInfo) {
+          var currentPage = resultInfo['books'].current_page,
+            totalPages = resultInfo['books'].num_pages;
+          $(renderPaginationForType('books', currentPage, totalPages)).appendTo(ctx.resultContainer);
+        };
+
+        var renderPaginationForType = function (type, currentPage, totalPages) {
+            var pages = '<div class="st-page">',
+              previousPage, nextPage;
+            if (currentPage != 1) {
+              previousPage = currentPage - 1;
+              pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>';
+            }
+            if (currentPage < totalPages) {
+              nextPage = currentPage + 1;
+              pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>';
+            }
+            pages += '</div>';
+            return pages;
+          };
+
+        var customResultsRenderer = function(ctx, data) {
+          var $resultContainer = ctx.resultContainer,
+            config = ctx.config;
+
+          $resultContainer.html('');
+
+          if (data.info['books'].current_page == 1) {
+            var mgResult = data.records['magazines'][0];
+            if (mgResult) {
+              ctx.registerResult($(resultTemplateOne.render(mgResult)).appendTo($resultContainer), mgResult);
+            }
+          }
+
+          $.each(data.records['books'], function (idx, item) {
+            ctx.registerResult($(resultTemplateTwo.render(item)).appendTo($resultContainer), item);
+          });
+
+          renderPagination(ctx, data.info);
+        };
+
+        $(function() {
+          $('#st-search-input').swiftypeSearch({
+            resultContainingElement: '#st-results-container',
+            engineKey: 'RRsxcbroahbgrJmEXWe',
+            renderResultsFunction: customResultsRenderer
+          });
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+          <h1>Example Swiftype Search installation (multiple document types)</h1>
+          Search your site: <input type='text' id='st-search-input' class='st-search-input' />
+        </form>
+        <div id="st-results-container" class="st-result-listing"></div>
+    </body>
+</html>

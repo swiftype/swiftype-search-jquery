@@ -150,18 +150,11 @@
       });
 
       var renderSearchResults = function (data) {
-          $resultContainer.html('');
-          if (typeof config.preRenderFunction === 'function') {
-            config.preRenderFunction.call($this, data);
-          }
-
-          $.each(data.records, function (documentType, items) {
-            $.each(items, function (idx, item) {
-              $this.registerResult($(config.renderFunction(documentType, item)).appendTo($resultContainer), item);
-            });
-          });
-          renderPagination($this.getContext(), data.info);
-        };
+        if (typeof config.preRenderFunction === 'function') {
+          config.preRenderFunction.call($this, data);
+        }
+        config.renderResultsFunction($this.getContext(), data);
+      };
 
       $this.getContext = function () {
         return {
@@ -211,6 +204,21 @@
     return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  var defaultRenderResultsFunction = function (ctx, data) {
+    var $resultContainer = ctx.resultContainer,
+      config = ctx.config;
+
+    $resultContainer.html('');
+
+    $.each(data.records, function (documentType, items) {
+      $.each(items, function (idx, item) {
+        ctx.registerResult($(config.renderFunction(documentType, item)).appendTo($resultContainer), item);
+      });
+    });
+
+    renderPagination(ctx, data.info);
+  };
+
   var defaultRenderFunction = function (document_type, item) {
       return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + htmlEscape(item['title']) + '</a></h3></div>';
     };
@@ -231,6 +239,7 @@
     fetchFields: undefined,
     preRenderFunction: undefined,
     loadingFunction: defaultLoadingFunction,
+    renderResultsFunction: defaultRenderResultsFunction,
     renderFunction: defaultRenderFunction,
     perPage: 10
   };
