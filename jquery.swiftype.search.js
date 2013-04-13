@@ -143,7 +143,7 @@
         });
       }
 
-      $('[data-hash][data-page]').live('click', function (e) {
+      $(document).on('click', '[data-hash][data-page]', function (e) {
         e.preventDefault();
         var $this = $(this);
         setSearchHash($.hashParams().stq, $this.data('page'));
