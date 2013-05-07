@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type='text/javascript' src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
-        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-        <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
-        <script type='text/javascript' src='jquery.swiftype.search.js'></script>
-        <link type='text/css' rel='stylesheet' href='search.css' media='all' />
-        <script type='text/javascript'>
-        var resultTemplate = Hogan.compile('<div class="st-result"><h3 class="title"><a href="{{url}}" class="st-search-result-link">{{title}}</a></h3><div class="st-metadata"><span class="st-snippet">{{{body}}}</span></div></div>');
-        var customRenderer = function(documentType, item) {
-          var data = {
-            title: item['title'],
-            url: item['url'],
-            body: item.highlight['body'] || 'No content.'
-          };
-          return resultTemplate.render(data);
+  <head>
+    <style>
+      span.st-snippet em {
+        font-style: normal;
+        font-weight: bold;
+        background: yellow;
+      }
+    </style>
+    <script type='text/javascript' src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+    <script type='text/javascript' src='jquery.swiftype.search.js'></script>
+    <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+    <script type='text/javascript'>
+      var resultTemplate = Hogan.compile('<div class="st-result"><h3 class="title"><a href="{{url}}" class="st-search-result-link">{{title}}</a></h3><div class="st-metadata"><span class="st-snippet">{{{body}}}</span></div></div>');
+      var customRenderer = function(documentType, item) {
+        var data = {
+          title: item['title'],
+          url: item['url'],
+          body: item.highlight['body'] || item['body'].substring(0, 300)
         };
+        return resultTemplate.render(data);
+      };
 
-        $(function() {
-          $('#st-search-input').swiftypeSearch({
-            resultContainingElement: '#st-results-container',
-            engineKey: '1us6PwsuxkLD7BotskHM',
-            renderFunction: customRenderer,
-            sortField: function() {
-              return {page: $('#st-sort-field').val()};
-            }
-          });
+      $(function() {
+        $('#st-search-input').swiftypeSearch({
+          resultContainingElement: '#st-results-container',
+          engineKey: '5eMMdfkKCgz5wxyhR9RL',
+          renderFunction: customRenderer,
+          sortField: function() {
+            return {page: $('#st-sort-field').val()};
+          }
         });
-        </script>
-    </head>
-    <body>
-        <form>
-          <h1>Example Swiftype Search installation (custom renderer)</h1>
-          Search your site: <input type='text' id='st-search-input' class='st-search-input' />
-        </form>
-        Sort by: <input type='text' id='st-sort-field' value="external_id" />
-        <div id="st-results-container" class="st-result-listing"></div>
-    </body>
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Example Swiftype Search installation (custom renderer)</h1>
+
+    <p>
+      This is a search engine for the Swiftype documentation (<a href="https://swiftype.com/documentation">see it in action</a>).
+      Try searches like "crawler", "index" or "robots".
+    </p>
+
+    <form>
+      Search your site: <input type='text' id='st-search-input' class='st-search-input' />
+    </form>
+    Sort by: <input type='text' id='st-sort-field' value="external_id" />
+    <div id="st-results-container" class="st-result-listing"></div>
+  </body>
 </html>

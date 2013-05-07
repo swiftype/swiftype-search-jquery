@@ -153,7 +153,12 @@
         if (typeof config.preRenderFunction === 'function') {
           config.preRenderFunction.call($this, data);
         }
+
         config.renderResultsFunction($this.getContext(), data);
+
+        if (typeof config.postRenderFunction === 'function') {
+          config.postRenderFunction.call($this, data);
+        }
       };
 
       $this.getContext = function () {
@@ -227,6 +232,20 @@
       $resultContainer.html('<p class="st-loading-message">loading...</p>');
     };
 
+  var defaultPostRenderFunction = function(data) {
+    var totalResultCount = 0;
+    var $resultContainer = this.getContext().resultContainer;
+    if (data['info']) {
+      $.each(data['info'], function(index, value) {
+        totalResultCount += value['total_result_count'];
+      });
+    }
+
+    if (totalResultCount === 0) {
+      $resultContainer.html("<div id='st-no-results' class='st-no-results'>No results found.</div>");
+    }
+  };
+
   $.fn.swiftypeSearch.defaults = {
     attachTo: undefined,
     documentTypes: undefined,
@@ -238,6 +257,7 @@
     sortDirection: undefined,
     fetchFields: undefined,
     preRenderFunction: undefined,
+    postRenderFunction: defaultPostRenderFunction,
     loadingFunction: defaultLoadingFunction,
     renderResultsFunction: defaultRenderResultsFunction,
     renderFunction: defaultRenderFunction,

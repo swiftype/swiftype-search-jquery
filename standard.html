@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-        <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
-        <script type='text/javascript' src='jquery.swiftype.search.js'></script>
-        <link type='text/css' rel='stylesheet' href='search.css' media='all' />
-        <script type='text/javascript'>
-          $(function() {
-            $('#st-search-input').swiftypeSearch({
-              resultContainingElement: '#st-results-container',
-              engineKey: '1us6PwsuxkLD7BotskHM'
-            });
-          });
-        </script>
-    </head>
-    <body>
-        <form>
-          <h1>Example Swiftype Search installation</h1>
-          Search your site: <input type='text' id='st-search-input' class='st-search-input' />
-        </form>
-        <div id="st-results-container" class="st-result-listing"></div>
-    </body>
+  <head>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+    <script type='text/javascript' src='jquery.swiftype.search.js'></script>
+    <link type='text/css' rel='stylesheet' href='search.css' media='all' />
+    <script type='text/javascript'>
+      $(function() {
+        $('#st-search-input').swiftypeSearch({
+          resultContainingElement: '#st-results-container',
+          engineKey: 'swiftype-api-example'
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Example Swiftype Search installation</h1>
+
+    <p>
+      This example shows the default behavior of the Swiftype search plugin using the data created in the <a href="https://github.com/swiftype/swiftype-api-example">swiftype-api-example</a> (also, check out our <a href="https://swiftype.com/documentation/tutorials/schema_design">tutorial about the example</a>).
+    </p>
+
+    <p>
+      Try searches for "cat", "psy", or "glass".
+    </p>
+
+    <form>
+      Search your site: <input type='text' id='st-search-input' class='st-search-input' />
+    </form>
+    <div id="st-results-container" class="st-result-listing"></div>
+  </body>
 </html>
