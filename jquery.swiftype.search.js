@@ -110,6 +110,7 @@
 
           params['search_fields'] = handleFunctionParam(config.searchFields);
           params['fetch_fields'] = handleFunctionParam(config.fetchFields);
+          params['facets'] = handleFunctionParam(config.facets);
           params['filters'] = handleFunctionParam(config.filters);
           params['document_types'] = handleFunctionParam(config.documentTypes);
           params['functional_boosts'] = handleFunctionParam(config.functionalBoosts);
@@ -249,6 +250,7 @@
   $.fn.swiftypeSearch.defaults = {
     attachTo: undefined,
     documentTypes: undefined,
+    facets: undefined,
     filters: undefined,
     engineKey: undefined,
     searchFields: undefined,
