@@ -175,7 +175,8 @@
   };
 
   var renderPagination = function (ctx, resultInfo) {
-    var maxPagesType, maxPages = -1;
+    var maxPagesType, maxPages = -1,
+      config = ctx.config;
     $.each(resultInfo, function(documentType, typeInfo) {
       if (typeInfo.num_pages > maxPages) {
         maxPagesType = documentType;
@@ -184,23 +185,10 @@
     });
     var currentPage = resultInfo[maxPagesType].current_page,
       totalPages = resultInfo[maxPagesType].num_pages;
-    $(renderPaginationForType(maxPagesType, currentPage, totalPages)).appendTo(ctx.resultContainer);
+
+    $(config.renderPaginationForType(maxPagesType, currentPage, totalPages)).appendTo(ctx.resultContainer);
   };
 
-  var renderPaginationForType = function (type, currentPage, totalPages) {
-      var pages = '<div class="st-page">',
-        previousPage, nextPage;
-      if (currentPage != 1) {
-        previousPage = currentPage - 1;
-        pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>';
-      }
-      if (currentPage < totalPages) {
-        nextPage = currentPage + 1;
-        pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>';
-      }
-      pages += '</div>';
-      return pages;
-    };
 
   var normalize = function (str) {
       return $.trim(str).toLowerCase();
@@ -247,6 +235,23 @@
     }
   };
 
+
+  var defaultRenderPaginationForType = function (type, currentPage, totalPages) {
+      var pages = '<div class="st-page">',
+        previousPage, nextPage;
+      if (currentPage != 1) {
+        previousPage = currentPage - 1;
+        pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>';
+      }
+      if (currentPage < totalPages) {
+        nextPage = currentPage + 1;
+        pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>';
+      }
+      pages += '</div>';
+      return pages;
+    };
+
+
   $.fn.swiftypeSearch.defaults = {
     attachTo: undefined,
     documentTypes: undefined,
@@ -263,6 +268,7 @@
     loadingFunction: defaultLoadingFunction,
     renderResultsFunction: defaultRenderResultsFunction,
     renderFunction: defaultRenderFunction,
+    renderPaginationForType: defaultRenderPaginationForType,
     perPage: 10
   };
 })(jQuery);
