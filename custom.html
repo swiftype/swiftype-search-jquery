@@ -27,8 +27,9 @@
       $(function() {
         $('#st-search-input').swiftypeSearch({
           resultContainingElement: '#st-results-container',
-          engineKey: '5eMMdfkKCgz5wxyhR9RL',
+          engineKey: '5jZG1gmmCTFYbSSDjpqq',
           renderFunction: customRenderer,
+          perPage: 3,
           sortField: function() {
             return {page: $('#st-sort-field').val()};
           }
