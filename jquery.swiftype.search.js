@@ -116,6 +116,7 @@
           params['functional_boosts'] = handleFunctionParam(config.functionalBoosts);
           params['sort_field'] = handleFunctionParam(config.sortField);
           params['sort_direction'] = handleFunctionParam(config.sortDirection);
+          params['spelling'] = handleFunctionParam(config.spelling);
 
           $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?", params).success(renderSearchResults);
         };
@@ -148,6 +149,12 @@
         e.preventDefault();
         var $this = $(this);
         setSearchHash($.hashParams().stq, $this.data('page'));
+      });
+
+      $(document).on('click', '[data-hash][data-spelling-suggestion]', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        setSearchHash($this.data('spelling-suggestion'), 1);
       });
 
       var renderSearchResults = function (data) {
@@ -224,14 +231,24 @@
   var defaultPostRenderFunction = function(data) {
     var totalResultCount = 0;
     var $resultContainer = this.getContext().resultContainer;
+    var spellingSuggestion = null;
+
     if (data['info']) {
       $.each(data['info'], function(index, value) {
         totalResultCount += value['total_result_count'];
+        if ( value['spelling_suggestion'] ) {
+          spellingSuggestion = value['spelling_suggestion']['text'];
+        }
+
       });
     }
 
     if (totalResultCount === 0) {
       $resultContainer.html("<div id='st-no-results' class='st-no-results'>No results found.</div>");
+    }
+
+    if (spellingSuggestion !== null) {
+      $resultContainer.append('<div class="st-spelling-suggestion">Did you mean <a href="#" data-hash="true" data-spelling-suggestion="' + spellingSuggestion + '">' + spellingSuggestion + '</a>?</div>');
     }
   };
 
@@ -269,6 +286,7 @@
     renderResultsFunction: defaultRenderResultsFunction,
     renderFunction: defaultRenderFunction,
     renderPaginationForType: defaultRenderPaginationForType,
-    perPage: 10
+    perPage: 10,
+    spelling: 'strict'
   };
 })(jQuery);
