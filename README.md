@@ -21,7 +21,7 @@ Include the following in the header of your webpage:
 
 All together it should look like this:
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
 	<script type="text/javascript" src="jquery.swiftype.search.js"></script>
 	<link type="text/css" rel="stylesheet" href="search.css" media="all" />
