@@ -95,7 +95,6 @@
           params['q'] = query;
           params['engine_key'] = config.engineKey;
           params['page'] = options.page;
-          params['per_page'] = config.perPage;
 
           function handleFunctionParam(field) {
             if (field !== undefined) {
@@ -108,6 +107,7 @@
             return undefined;
           }
 
+          params['per_page'] = handleFunctionParam(config.perPage);
           params['search_fields'] = handleFunctionParam(config.searchFields);
           params['fetch_fields'] = handleFunctionParam(config.fetchFields);
           params['facets'] = handleFunctionParam(config.facets);
