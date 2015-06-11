@@ -21,6 +21,6 @@
   ],
   "dependencies": {
     "jquery": ">=1.11.1",
-    "jquery-hashchange": ">0"
+    "jquery-hashchange": "latest"
   }
 }
