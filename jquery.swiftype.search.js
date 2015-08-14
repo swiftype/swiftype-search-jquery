@@ -56,7 +56,7 @@
           var $el = $(this);
           e.preventDefault();
           Swiftype.pingSearchResultClick(config.engineKey, data['id'], function() {
-            window.location = $el.attr('href');
+            config.onComplete($el);
           });
         };
       };
@@ -228,6 +228,10 @@
       $resultContainer.html('<p class="st-loading-message">loading...</p>');
     };
 
+  var defaultOnComplete = function(elem) {
+    window.location = elem.attr('href');
+  };
+
   var defaultPostRenderFunction = function(data) {
     var totalResultCount = 0;
     var $resultContainer = this.getContext().resultContainer;
@@ -286,6 +290,7 @@
     renderResultsFunction: defaultRenderResultsFunction,
     renderFunction: defaultRenderFunction,
     renderPaginationForType: defaultRenderPaginationForType,
+    onComplete: defaultOnComplete,
     perPage: 10,
     spelling: 'strict'
   };
