@@ -44,7 +44,7 @@
   };
 
   $.fn.swiftypeSearch = function (options) {
-    var options = $.extend({}, $.fn.swiftypeSearch.defaults, options);
+    var options = $.extend(true,{}, $.fn.swiftypeSearch.defaults, options);
 
     return this.each(function () {
       var $this = $(this);
