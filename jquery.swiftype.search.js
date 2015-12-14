@@ -89,7 +89,7 @@
             $resultContainer.after("<div id='" + contentCacheId + "' style='display: none;'></div>");
             $contentCache.html(initialContentOfResultContainer).hide();
           }
-          config.loadingFunction(query, $resultContainer);
+          config.loadingFunction(query, $resultContainer, config.translations);
 
           Swiftype.currentQuery = query;
           params['q'] = query;
@@ -165,7 +165,7 @@
         config.renderResultsFunction($this.getContext(), data);
 
         if (typeof config.postRenderFunction === 'function') {
-          config.postRenderFunction.call($this, data);
+          config.postRenderFunction.call($this, data, config.translations);
         }
       };
 
@@ -193,7 +193,7 @@
     var currentPage = resultInfo[maxPagesType].current_page,
       totalPages = resultInfo[maxPagesType].num_pages;
 
-    $(config.renderPaginationForType(maxPagesType, currentPage, totalPages)).appendTo(ctx.resultContainer);
+    $(config.renderPaginationForType(maxPagesType, currentPage, totalPages, config.translations)).appendTo(ctx.resultContainer);
   };
 
 
@@ -224,15 +224,15 @@
       return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + htmlEscape(item['title']) + '</a></h3></div>';
     };
 
-  var defaultLoadingFunction = function(query, $resultContainer) {
-      $resultContainer.html('<p class="st-loading-message">loading...</p>');
+  var defaultLoadingFunction = function(query, $resultContainer, translations) {
+      $resultContainer.html('<p class="st-loading-message">' + translations.loading + '</p>');
     };
 
   var defaultOnComplete = function(elem) {
     window.location = elem.attr('href');
   };
 
-  var defaultPostRenderFunction = function(data) {
+  var defaultPostRenderFunction = function(data, translations) {
     var totalResultCount = 0;
     var $resultContainer = this.getContext().resultContainer;
     var spellingSuggestion = null;
@@ -248,25 +248,25 @@
     }
 
     if (totalResultCount === 0) {
-      $resultContainer.html("<div id='st-no-results' class='st-no-results'>No results found.</div>");
+      $resultContainer.html("<div id='st-no-results' class='st-no-results'>" + translations.noResultsFound + "</div>");
     }
 
     if (spellingSuggestion !== null) {
-      $resultContainer.append('<div class="st-spelling-suggestion">Did you mean <a href="#" data-hash="true" data-spelling-suggestion="' + spellingSuggestion + '">' + spellingSuggestion + '</a>?</div>');
+      $resultContainer.append('<div class="st-spelling-suggestion">' + translations.didyouMean + ' <a href="#" data-hash="true" data-spelling-suggestion="' + spellingSuggestion + '">' + spellingSuggestion + '</a>?</div>');
     }
   };
 
 
-  var defaultRenderPaginationForType = function (type, currentPage, totalPages) {
+  var defaultRenderPaginationForType = function (type, currentPage, totalPages, translations) {
       var pages = '<div class="st-page">',
         previousPage, nextPage;
       if (currentPage != 1) {
         previousPage = currentPage - 1;
-        pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">&laquo; previous</a>';
+        pages = pages + '<a href="#" class="st-prev" data-hash="true" data-page="' + previousPage + '">' + translations.previousPage + '</a>';
       }
       if (currentPage < totalPages) {
         nextPage = currentPage + 1;
-        pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">next &raquo;</a>';
+        pages = pages + '<a href="#" class="st-next" data-hash="true" data-page="' + nextPage + '">' + translations.nextPage + '</a>';
       }
       pages += '</div>';
       return pages;
@@ -292,6 +292,13 @@
     renderPaginationForType: defaultRenderPaginationForType,
     onComplete: defaultOnComplete,
     perPage: 10,
-    spelling: 'strict'
+    spelling: 'strict',
+    translations: {
+      previousPage: "&laquo; previous",
+      nextPage: "next &raquo;",
+      noResultsFound: "No results found.",
+      didYouMean: "Did you mean",
+      loading: "loading..."
+    }
   };
 })(jQuery);
