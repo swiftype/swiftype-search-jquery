@@ -9,7 +9,10 @@
       $(function() {
         $('#st-search-input').swiftypeSearch({
           resultContainingElement: '#st-results-container',
-          engineKey: 'swiftype-api-example'
+          engineKey: 'swiftype-api-example',
+          translations: {
+            loading: 'Loading results...'
+          }
         });
       });
     </script>
