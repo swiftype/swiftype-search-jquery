@@ -118,7 +118,13 @@
           params['sort_direction'] = handleFunctionParam(config.sortDirection);
           params['spelling'] = handleFunctionParam(config.spelling);
 
-          $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?", params).success(renderSearchResults);
+          $.ajax({
+            dataType: "json",
+            url: Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?",
+            data: params,
+            xhrFields: { withCredentials: true },
+            success: renderSearchResults
+          });
         };
 
       $(window).hashchange(function () {
