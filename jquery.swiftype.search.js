@@ -117,6 +117,7 @@
           params['sort_field'] = handleFunctionParam(config.sortField);
           params['sort_direction'] = handleFunctionParam(config.sortDirection);
           params['spelling'] = handleFunctionParam(config.spelling);
+          params['highlight_fields'] = handleFunctionParam(config.highlightFields);
 
           $.ajax({
             dataType: "json",
@@ -290,6 +291,7 @@
     sortField: undefined,
     sortDirection: undefined,
     fetchFields: undefined,
+    highlightFields: undefined,
     preRenderFunction: undefined,
     postRenderFunction: defaultPostRenderFunction,
     loadingFunction: defaultLoadingFunction,
