@@ -19,7 +19,7 @@
         var data = {
           title: item['title'],
           url: item['url'],
-          body: item.highlight['body'] || item['body'].substring(0, 300)
+          body: item.highlight['body']
         };
         return resultTemplate.render(data);
       };
@@ -29,6 +29,9 @@
           resultContainingElement: '#st-results-container',
           engineKey: '5jZG1gmmCTFYbSSDjpqq',
           renderFunction: customRenderer,
+          highlightFields: {
+            'page': {'body': {'size': 300, 'fallback': true}}
+          },
           perPage: 3,
           sortField: function() {
             return {page: $('#st-sort-field').val()};
