@@ -21,21 +21,34 @@ Include the following in the header of your webpage:
 
 All together it should look like this:
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
-	<script type="text/javascript" src="jquery.swiftype.search.js"></script>
-	<link type="text/css" rel="stylesheet" href="search.css" media="all" />
+```html
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+<script type="text/javascript" src="jquery.swiftype.search.js"></script>
+<link type="text/css" rel="stylesheet" href="search.css" media="all" />
+```
 
 
 Basic Usage
 -----
 
-Simply apply the swiftype method to an existing search input field on your webpage and provide a container for results. For example, add it to a search input field with id `st-search-input` as follows:
+Start by having at least these three elements on the page: a form, an input field within the form, and a container for results.
 
-	$('#st-search-input').swiftypeSearch({
-	  resultContainingElement: '#st-results-container',
-	  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-	});
+```html
+<form>
+  <input type='text' placeholder='Search' id='st-search-input' />
+</form>
+<div id="st-results-container"></div>
+```
+
+Simply apply the swiftype method to an existing search input field within a form on your webpage and provide a container for results. For example, add it to a search input field with id `st-search-input` as follows:
+
+```js
+$('#st-search-input').swiftypeSearch({
+  resultContainingElement: '#st-results-container',
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+});
+```
 
 Be sure to change the `engineKey` attribute shown above to match the one assigned to your Swiftype search engine. If you are using the web interface, the search engine key is listed on the first page of your dashboard.
 
@@ -53,10 +66,12 @@ Let's go through an example that does all of this. For this example, let's assum
 
 To specify the number of results per page, use the `perPage` attribute.
 
-	$('#st-search-input').swiftypeSearch({ 
-		engineKey: 'jaDGyzkR6iYHkfNsPpNK',
-                perPage: 20
-	});
+```js
+$('#st-search-input').swiftypeSearch({ 
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK',
+  perPage: 20
+});
+```
         
 The maximium value that will be honored by the API is 100.
 
@@ -64,10 +79,12 @@ The maximium value that will be honored by the API is 100.
 
 To specify the fields you would like returned from the API, set the `fetchFields` attribute to a hash containing an array listing the fields you want returned for each document type. For example, if you have indexed `title`, `genre`, and `published_on` fields for each document, you can have them returned as follows:
 
-	$('#st-search-input').swiftypeSearch({ 
-		fetchFields: {'books': ['title','genre','published_on']},
-		engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-	});
+```js
+$('#st-search-input').swiftypeSearch({ 
+  fetchFields: {'books': ['title','genre','published_on']},
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+});
+```
 
 These additional fields will be returned with each item, and they can be accessed in the rendering function as shown in the next section.
 
@@ -77,36 +94,43 @@ Now that you have more data for each result item, you'll want to customize the i
 
 The default rendering function is shown below:
 
-    var defaultRenderFunction = function(document_type, item) {
-      return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
-    };
+```js
+var defaultRenderFunction = function(document_type, item) {
+  return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
+};
+```
 
 The additional fields are available as keys in the item dictionary, so you could customize this to make use of the `genre` field as follows:
 
-	var customRenderFunction = function(document_type, item) {
-		var out = '<a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a>';
-		return out.concat('<p class="genre">' + item['genre'] + '</p>');
-	};
+```js
+var customRenderFunction = function(document_type, item) {
+  var out = '<a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a>';
+  return out.concat('<p class="genre">' + item['genre'] + '</p>');
+};
+```
 
 Now simply set the `renderFunction` attribute in the options dictionary to your `customRenderFunction` to tell our plugin to use your function to render results:
 
-	$('#st-search-input').swiftypeSearch({ 
-		renderFunction: customRenderFunction,
-		fetchFields: {'books': ['title','genre','published_on']},
-		engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-	});
-
+```js
+$('#st-search-input').swiftypeSearch({ 
+  renderFunction: customRenderFunction,
+  fetchFields: {'books': ['title','genre','published_on']},
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+});
+```
 
 #### Restricting matching to particular fields
 
 By default, the Swiftype search library will match the submitted query to any `string` or `text` field indexed for your documents. So if you would like to ensure that it only matches entries in the `title` field, for example, you can specify the `searchFields` option:
 
-	$('#st-search-input').swiftypeSearch({ 
-		renderFunction: customRenderFunction,
-		fetchFields: {'books': ['title','genre','published_on']},
-		searchFields: {'books': ['title']},
-		engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-	});
+```
+$('#st-search-input').swiftypeSearch({ 
+  renderFunction: customRenderFunction,
+  fetchFields: {'books': ['title','genre','published_on']},
+  searchFields: {'books': ['title']},
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+});
+```
 
 Similarly to the `fetchFields` option, `searchFields` accepts a hash containing an array of fields for each document_type on which you would like the user's query to match. 
 
@@ -114,15 +138,15 @@ Similarly to the `fetchFields` option, `searchFields` accepts a hash containing 
 
 Now let's say you only want your results to display books that are of the **fiction** `genre` and are **in_stock**. In order to restrict search results, you can pass additional query conditions to the search API by specifying them as a dictionary in the `filters` field. Multiple clauses in the filters field are combined with AND logic:
 
-
-	$('#st-search-input').swiftypeSearch({ 
-		renderFunction: customRenderFunction,
-		fetchFields: {'books': ['title','genre','published_on']},
-		filters: {'books': {'genre': 'fiction', 'in_stock': true}},
-		searchFields: {'books': ['title']},
-		engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-	});
-
+```js
+$('#st-search-input').swiftypeSearch({ 
+  renderFunction: customRenderFunction,
+  fetchFields: {'books': ['title','genre','published_on']},
+  filters: {'books': {'genre': 'fiction', 'in_stock': true}},
+  searchFields: {'books': ['title']},
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+});
+```
 
 
 Questions?
