@@ -128,7 +128,7 @@
           });
         };
 
-      $(window).hashchange(function () {
+      window.addEventListener('hashchange', function () {
         var params = $.hashParams();
         if (params.stq) {
           submitSearch(params.stq, {
