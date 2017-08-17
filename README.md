@@ -75,6 +75,25 @@ $('#st-search-input').swiftypeSearch({
         
 The maximium value that will be honored by the API is 100.
 
+#### Returning a matching highlight snippet
+
+Any fields that are queried during a search will return the top match (if any) in the highlight property of the results. All snippets in this form have HTML entities from the original text encoded. Actual highlighting is specified using (unencoded) `<em>` tags.
+
+You can customize which fields are returned in the highlight property by using the `highlightFields` option:
+
+```JavaScript
+$('#st-search-input').swiftypeSearch({
+  renderFunction: customRenderFunction,
+  fetchFields: {'books': ['title','genre','published_on']},
+  engineKey: 'jaDGyzkR6iYHkfNsPpNK'
+  highlightFields: {'books': {'body': {'size': 300, 'fallback': true }}}
+});
+```
+
+The `highlightFields` option accepts a hash containing the fields you want to have highlighted for each object of each document type. For each field, specify `size` as the maximum number of characters to include in the snippet. Set `fallback` to true to force inclusion of a non-highlighted snippet if a highlight is not available for that field.
+
+See the [custom.html](https://github.com/swiftype/swiftype-search-jquery/blob/master/custom.html) file for an additional example of `highlightFields`.
+
 #### Fetching only the fields you specify
 
 To specify the fields you would like returned from the API, set the `fetchFields` attribute to a hash containing an array listing the fields you want returned for each document type. For example, if you have indexed `title`, `genre`, and `published_on` fields for each document, you can have them returned as follows:
