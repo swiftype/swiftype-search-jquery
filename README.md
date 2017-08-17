@@ -71,8 +71,7 @@ $('#st-search-input').swiftypeSearch({
   renderFunction: customRenderFunction,
   fetchFields: {'books': ['title','genre','published_on']},
   engineKey: 'jaDGyzkR6iYHkfNsPpNK'
-  highlightFields: {'books': {'body': {'size': 300, 'fallback': true }}
-  }
+  highlightFields: {'books': {'body': {'size': 300, 'fallback': true }}}
 });
 ```
 
