@@ -184,7 +184,6 @@
         };
       };
 
-      $(window).hashchange(); // if the swiftype query hash is present onload (maybe the user is pressing the back button), submit a query onload
     });
   };
 
