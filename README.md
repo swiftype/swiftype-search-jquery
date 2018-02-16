@@ -1,4 +1,4 @@
-Swiftype Site Search jQuery Plugin
+jQuery Plugin for Swiftype Site Search
 =========
 
 The official [Swiftype Site Search](http://www.swiftype.com/site-search) jQuery plugin for adding search functionality backed by data from the Swiftype Site Search API. Learn more about Swiftype by visiting [swiftype.com](http://www.swiftype.com) and creating an account.
