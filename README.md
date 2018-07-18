@@ -25,7 +25,7 @@ All together it should look like this:
 
 ```html
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type='text/javascript' src='jquery.ba-hashchange.min.js'></script>
+<script type="text/javascript" src="jquery.ba-hashchange.min.js"></script>
 <script type="text/javascript" src="jquery.swiftype.search.js"></script>
 <link type="text/css" rel="stylesheet" href="search.css" media="all" />
 ```
@@ -38,7 +38,7 @@ Start by having at least these three elements on the page: a form, an input fiel
 
 ```html
 <form>
-  <input type='text' placeholder='Search' id='st-search-input' />
+  <input type="text" placeholder="Search" id="st-search-input" />
 </form>
 <div id="st-results-container"></div>
 ```
@@ -58,9 +58,9 @@ Be sure to change the `engineKey` attribute shown above to match the one assigne
 Customization Tutorial
 -------------
 
-This plugin is written to be flexible based on your specific use-case. 
+This plugin is written to be flexible based on your specific use-case.
 For example you might want to retrieve more data for each result, customize
-the way data is display to the user, or restrict the search query to certain elements of your search engine. 
+the way data is display to the user, or restrict the search query to certain elements of your search engine.
 
 Let's go through an example that does all of this. For this example, let's assume you followed the QuickStart tutorial for our [Ruby Gem](https://github.com/swiftype/swiftype-rb), and now you have data for a Bookstore indexed in your example search engine.
 
@@ -69,12 +69,12 @@ Let's go through an example that does all of this. For this example, let's assum
 To specify the number of results per page, use the `perPage` attribute.
 
 ```js
-$('#st-search-input').swiftypeSearch({ 
+$('#st-search-input').swiftypeSearch({
   engineKey: 'jaDGyzkR6iYHkfNsPpNK',
   perPage: 20
 });
 ```
-        
+
 The maximium value that will be honored by the API is 100.
 
 #### Returning a matching highlight snippet
@@ -101,7 +101,7 @@ See the [custom.html](https://github.com/swiftype/swiftype-search-jquery/blob/ma
 To specify the fields you would like returned from the API, set the `fetchFields` attribute to a hash containing an array listing the fields you want returned for each document type. For example, if you have indexed `title`, `genre`, and `published_on` fields for each document, you can have them returned as follows:
 
 ```js
-$('#st-search-input').swiftypeSearch({ 
+$('#st-search-input').swiftypeSearch({
   fetchFields: {'books': ['title','genre','published_on']},
   engineKey: 'jaDGyzkR6iYHkfNsPpNK'
 });
@@ -133,7 +133,7 @@ var customRenderFunction = function(document_type, item) {
 Now simply set the `renderFunction` attribute in the options dictionary to your `customRenderFunction` to tell our plugin to use your function to render results:
 
 ```js
-$('#st-search-input').swiftypeSearch({ 
+$('#st-search-input').swiftypeSearch({
   renderFunction: customRenderFunction,
   fetchFields: {'books': ['title','genre','published_on']},
   engineKey: 'jaDGyzkR6iYHkfNsPpNK'
@@ -145,7 +145,7 @@ $('#st-search-input').swiftypeSearch({
 By default, the Swiftype search library will match the submitted query to any `string` or `text` field indexed for your documents. So if you would like to ensure that it only matches entries in the `title` field, for example, you can specify the `searchFields` option:
 
 ```
-$('#st-search-input').swiftypeSearch({ 
+$('#st-search-input').swiftypeSearch({
   renderFunction: customRenderFunction,
   fetchFields: {'books': ['title','genre','published_on']},
   searchFields: {'books': ['title']},
@@ -153,14 +153,14 @@ $('#st-search-input').swiftypeSearch({
 });
 ```
 
-Similarly to the `fetchFields` option, `searchFields` accepts a hash containing an array of fields for each document_type on which you would like the user's query to match. 
+Similarly to the `fetchFields` option, `searchFields` accepts a hash containing an array of fields for each document_type on which you would like the user's query to match.
 
 #### Specifying additional query conditions
 
 Now let's say you only want your results to display books that are of the **fiction** `genre` and are **in_stock**. In order to restrict search results, you can pass additional query conditions to the search API by specifying them as a dictionary in the `filters` field. Multiple clauses in the filters field are combined with AND logic:
 
 ```js
-$('#st-search-input').swiftypeSearch({ 
+$('#st-search-input').swiftypeSearch({
   renderFunction: customRenderFunction,
   fetchFields: {'books': ['title','genre','published_on']},
   filters: {'books': {'genre': 'fiction', 'in_stock': true}},
@@ -172,4 +172,4 @@ $('#st-search-input').swiftypeSearch({
 
 Questions?
 ----------
-Get in touch! We would be happy to help you get up and running. 
+Get in touch! We would be happy to help you get up and running.
