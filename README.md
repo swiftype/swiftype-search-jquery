@@ -6,7 +6,7 @@
 
 + [Getting started](#getting-started-)
 + [Usage](#usage)
-+ [Customization Tutorial](#customization-tutorial)
++ [Customization tutorial](#customization-tutorial)
 + [FAQ](#faq-)
 + [Contribute](#contribute-)
 + [License](#license-)
