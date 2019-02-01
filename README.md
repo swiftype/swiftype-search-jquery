@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/swiftype/swiftype-search-jquery/blob/master/logo-app-search.png?raw=true" alt="Elastic Site Search Logo"></p>
 
-> A first-party [Elastic Site Search](https://swiftype.com/documentation/site-search/overview) jQuery plugin for adding website search.
+> A first-party [Elastic Site Search](https://swiftype.com/documentation/site-search/overview) jQuery plugin for website search.
 
 ## Contents
 
