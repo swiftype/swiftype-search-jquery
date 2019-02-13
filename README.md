@@ -23,7 +23,6 @@ Requirements:
 Include the following in the header of your webpage:
 
 * the latest version of jQuery
-* the [hashchange](https://github.com/cowboy/jquery-hashchange) jQuery plugin (version included)
 * the Swiftype Search jQuery plugin
 * (optional) the Swiftype Search stylesheet
 
@@ -31,7 +30,6 @@ All together it should look like this:
 
 ```html
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="jquery.ba-hashchange.min.js"></script>
 <script type="text/javascript" src="jquery.swiftype.search.js"></script>
 <link type="text/css" rel="stylesheet" href="search.css" media="all" />
 ```

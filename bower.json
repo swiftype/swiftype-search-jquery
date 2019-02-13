@@ -20,7 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": ">=1.11.1",
-    "jquery-hashchange": "latest"
+    "jquery": ">=1.11.1"
   }
 }

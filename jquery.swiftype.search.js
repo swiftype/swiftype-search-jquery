@@ -128,7 +128,7 @@
           });
         };
 
-      $(window).hashchange(function () {
+      function handleHashchange () {
         var params = $.hashParams();
         if (params.stq) {
           submitSearch(params.stq, {
@@ -141,7 +141,9 @@
             $contentCache.remove();
           }
         }
-      });
+      }
+
+      $(window).on("hashchange", handleHashchange);
 
       var $containingForm = $this.parents('form');
       if ($containingForm) {
@@ -184,7 +186,7 @@
         };
       };
 
-      $(window).hashchange(); // if the swiftype query hash is present onload (maybe the user is pressing the back button), submit a query onload
+      handleHashchange(); // if the swiftype query hash is present onload (maybe the user is pressing the back button), submit a query onload
     });
   };
 
