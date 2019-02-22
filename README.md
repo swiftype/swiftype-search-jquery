@@ -174,6 +174,10 @@ $('#st-search-input').swiftypeSearch({
 
 ## FAQ 🔮
 
+### Can I use this with the Swiftype Autocomplete Plugin?
+
+Yes! If you are looking for autocomplete functionality, checkout out the [Swiftype Autocomplete Plugin](https://github.com/swiftype/swiftype-autocomplete-jquery).
+
 ### Where do I report issues with the client?
 
 If something is not working as expected, please open an [issue](https://github.com/swiftype/swiftype-search-jquery/issues/new).
