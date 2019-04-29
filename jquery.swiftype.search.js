@@ -21,7 +21,7 @@
 
 
   window.Swiftype = window.Swiftype || {};
-  Swiftype.root_url = Swiftype.root_url || 'https://api.swiftype.com';
+  Swiftype.root_url = Swiftype.root_url || 'https://search-api.swiftype.com';
   Swiftype.pingUrl = function(endpoint, callback) {
     var to = setTimeout(callback, 350);
     var img = new Image();
@@ -121,7 +121,7 @@
 
           $.ajax({
             dataType: "json",
-            url: Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?",
+            url: Swiftype.root_url + '/api/v1/public/installs/' + params['engine_key'] + '/search.json?callback=?',
             data: params,
             xhrFields: { withCredentials: true },
             success: renderSearchResults
