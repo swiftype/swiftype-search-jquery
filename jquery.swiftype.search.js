@@ -143,6 +143,9 @@
         }
       }
 
+      // Expose this globally for users to force a refresh of search results.
+      Swiftype.reloadResults = handleHashchange;
+
       $(window).on("hashchange", handleHashchange);
 
       var $containingForm = $this.parents('form');
