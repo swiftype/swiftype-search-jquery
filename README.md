@@ -172,6 +172,16 @@ $('#st-search-input').swiftypeSearch({
 });
 ```
 
+### Triggering a new query
+
+In come cases, you may need to manually trigger a new search. The following method can be
+used to do so. An example of such a case would be if a user chooses to apply a filter
+and a new query needs top be executed.
+
+```
+Swiftype.reloadResults();
+```
+
 ## FAQ 🔮
 
 ### Can I use this with the Swiftype Autocomplete Plugin?
